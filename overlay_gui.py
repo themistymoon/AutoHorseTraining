@@ -24,6 +24,7 @@ try:
         OCR_AVAILABLE = False
         print("OCR functionality not available")
     import pygetwindow as gw
+    from hotkey_manager import start_global_hotkeys, stop_global_hotkeys
     BOT_AVAILABLE = True
 except ImportError as e:
     print(f"Bot functionality not available: {e}")
@@ -43,6 +44,19 @@ class TrainingAssistant:
         # Bot control state
         self.bot_thread = None
         self.bot_running = False
+        self.current_hotkey = "f1"  # Default hotkey
+        
+        # Start F1 hotkey listener
+        if BOT_AVAILABLE:
+            try:
+                from hotkey_manager import HotkeyManager
+                global hotkey_manager
+                hotkey_manager = HotkeyManager(self)
+                hotkey_manager.current_hotkey = self.current_hotkey
+                hotkey_manager.start_hotkey_listener()
+                print(f"✅ {self.current_hotkey.upper()} hotkey listener started")
+            except Exception as e:
+                print(f"⚠️ Hotkey failed to start: {e}")
         
     def setup_window(self):
         """Setup the overlay window properties"""
@@ -187,9 +201,15 @@ class TrainingAssistant:
         # Controls Section (moved to be right after Status)
         self.create_section_header("🎮 Controls")
         
-        # Main control button
-        self.start_button = ttk.Button(self.content_frame, text="▶️ Start Training", command=self.toggle_bot, style='Success.TButton')
-        self.start_button.pack(fill=tk.X, pady=(0, 5))
+        # Main control row with start button and hotkey button
+        control_row = ttk.Frame(self.content_frame, style='Dark.TFrame')
+        control_row.pack(fill=tk.X, pady=(0, 5))
+        
+        self.start_button = ttk.Button(control_row, text="▶️ Start Training", command=self.toggle_bot, style='Success.TButton')
+        self.start_button.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 3))
+        
+        self.hotkey_button = ttk.Button(control_row, text="⌨️ F1", command=self.edit_hotkey, style='Modern.TButton')
+        self.hotkey_button.pack(side=tk.RIGHT, padx=(3, 0))
         
         # Quick action buttons
         action_row = ttk.Frame(self.content_frame, style='Dark.TFrame')
@@ -399,6 +419,10 @@ class TrainingAssistant:
                 self.ocr_confidence.set(str(config.get("ocr_confidence", 80)))
                 self.action_delay.set(str(config.get("action_delay", 500)))
                 
+                # Load hotkey
+                self.current_hotkey = config.get("hotkey", "f1")
+                self.update_hotkey_button()
+                
         except Exception as e:
             print(f"Error loading settings: {e}")
     
@@ -422,6 +446,9 @@ class TrainingAssistant:
                 "rainbow_strict": self.rainbow_strict.get(),
                 "ocr_confidence": int(self.ocr_confidence.get() or 80),
                 "action_delay": int(self.action_delay.get() or 500),
+                
+                # Hotkey setting
+                "hotkey": self.current_hotkey,
                 
                 # Priority order
                 "priority_order": [self.priority_listbox.get(i) for i in range(self.priority_listbox.size())],
@@ -457,6 +484,100 @@ class TrainingAssistant:
         except Exception as e:
             print(f"Error getting config: {e}")
             return {}
+    
+    def edit_hotkey(self):
+        """Open hotkey editor dialog"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("⌨️ Edit Hotkey")
+        dialog.geometry("300x150")
+        dialog.wm_attributes("-topmost", True)
+        dialog.configure(bg=self.colors['bg'])
+        dialog.resizable(False, False)
+        
+        # Center on parent
+        dialog.transient(self.root)
+        dialog.grab_set()
+        
+        # Main frame
+        main_frame = ttk.Frame(dialog, style='Dark.TFrame')
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
+        
+        # Info label
+        info_label = ttk.Label(main_frame, text="Press any key to set as hotkey:", style='Dark.TLabel')
+        info_label.pack(pady=(0, 10))
+        
+        # Current hotkey display
+        current_label = ttk.Label(main_frame, text=f"Current: {self.current_hotkey.upper()}", 
+                                 style='Title.TLabel', foreground=self.colors['accent'])
+        current_label.pack(pady=(0, 10))
+        
+        # Instruction
+        instruction_label = ttk.Label(main_frame, text="Click here and press a key:", style='Dark.TLabel')
+        instruction_label.pack(pady=(0, 5))
+        
+        # Key capture entry
+        key_var = tk.StringVar(value=self.current_hotkey)
+        key_entry = ttk.Entry(main_frame, textvariable=key_var, justify=tk.CENTER)
+        key_entry.pack(fill=tk.X, pady=(0, 10))
+        key_entry.focus_set()
+        
+        def on_key_press(event):
+            key = event.keysym.lower()
+            if key in ['escape']:
+                dialog.destroy()
+                return
+            key_var.set(key)
+            
+        key_entry.bind('<KeyPress>', on_key_press)
+        
+        # Buttons
+        btn_frame = ttk.Frame(main_frame, style='Dark.TFrame')
+        btn_frame.pack(fill=tk.X)
+        
+        def save_hotkey():
+            new_hotkey = key_var.get().lower()
+            if new_hotkey and new_hotkey != self.current_hotkey:
+                self.set_hotkey(new_hotkey)
+            dialog.destroy()
+            
+        def cancel():
+            dialog.destroy()
+            
+        ttk.Button(btn_frame, text="Save", command=save_hotkey, style='Success.TButton').pack(side=tk.RIGHT, padx=(5, 0))
+        ttk.Button(btn_frame, text="Cancel", command=cancel, style='Modern.TButton').pack(side=tk.RIGHT)
+    
+    def set_hotkey(self, new_hotkey):
+        """Set new hotkey and restart listener"""
+        try:
+            # Stop current hotkey listener
+            if BOT_AVAILABLE:
+                stop_global_hotkeys()
+            
+            # Update hotkey
+            self.current_hotkey = new_hotkey
+            self.update_hotkey_button()
+            
+            # Restart hotkey listener with new key
+            if BOT_AVAILABLE:
+                from hotkey_manager import HotkeyManager
+                global hotkey_manager
+                hotkey_manager = HotkeyManager(self)
+                hotkey_manager.current_hotkey = new_hotkey
+                hotkey_manager.start_hotkey_listener()
+                print(f"✅ Hotkey changed to: {new_hotkey.upper()}")
+            
+            # Save settings
+            self.save_settings()
+            
+        except Exception as e:
+            print(f"⚠️ Error setting hotkey: {e}")
+    
+    def update_hotkey_button(self):
+        """Update hotkey button text"""
+        try:
+            self.hotkey_button.config(text=f"⌨️ {self.current_hotkey.upper()}")
+        except AttributeError:
+            pass
             
     def move_priority_up(self):
         """Move selected priority item up"""
@@ -810,6 +931,14 @@ class TrainingAssistant:
     def close_application(self):
         """Close application with cleanup"""
         try:
+            # Stop F1 hotkey listener
+            if BOT_AVAILABLE:
+                try:
+                    stop_global_hotkeys()
+                    print("🔇 F1 hotkey listener stopped")
+                except Exception as e:
+                    print(f"⚠️ Error stopping hotkey listener: {e}")
+            
             # Stop bot if running
             if self.bot_running:
                 self.stop_bot()
@@ -839,7 +968,7 @@ class TrainingAssistant:
 
 def main():
     root = tk.Tk()
-    app = TrainingAssistant(root)
+    TrainingAssistant(root)
     root.mainloop()
 
 if __name__ == "__main__":

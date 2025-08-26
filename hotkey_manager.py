@@ -8,9 +8,10 @@ class HotkeyManager:
     def __init__(self, overlay_app=None):
         self.overlay_app = overlay_app
         self.is_listening = False
+        self.current_hotkey = "f1"  # Default hotkey
         
     def start_hotkey_listener(self):
-        """Start the F1 hotkey listener"""
+        """Start the hotkey listener"""
         if not self.is_listening:
             self.is_listening = True
             hotkey_thread = threading.Thread(target=self._hotkey_loop, daemon=True)
@@ -22,11 +23,11 @@ class HotkeyManager:
         
     def _hotkey_loop(self):
         """Main hotkey listener loop"""
-        print("[HOTKEY] F1 hotkey listener started")
+        print(f"[HOTKEY] {self.current_hotkey.upper()} hotkey listener started")
         
         while self.is_listening:
             try:
-                keyboard.wait('f1')
+                keyboard.wait(self.current_hotkey)
                 time.sleep(0.1)  # Debounce
                 
                 if self.overlay_app:

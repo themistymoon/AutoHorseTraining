@@ -10,6 +10,7 @@
   "rainbow_strict": false,
   "ocr_confidence": 80,
   "action_delay": 500,
+  "hotkey": "f1",
   "priority_order": [
     "Speed",
     "Stamina",
