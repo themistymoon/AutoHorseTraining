@@ -43,6 +43,13 @@ We are grateful to all contributors who made this project possible.
 
 ## Installation
 
+### Quick Start (Windows)
+1. Download the repository as ZIP or clone it
+2. **Double-click `AutoHorseTraining.bat`** - This will automatically:
+   - Check if Python is installed
+   - Install required dependencies
+   - Start the GUI with hotkey support
+
 ### Manual Installation
 ```bash
 git clone https://github.com/themistymoon/AutoHorseTraining.git
