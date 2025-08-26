@@ -1,8 +1,21 @@
-# Umamusume Auto Train
+# AutoHorseTraining - Umamusume Auto Train
 
-Like the title says, this is a simple auto training for Umamusume.
+Like the title says, this is a simple auto training for Umamusume with advanced point-based training system.
 
-This project is inspired by [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
+## 🙏 Attribution & Credits
+
+This project is inspired by and builds upon the excellent work from:
+- **Original Repository**: [samsulpanjul/umamusume-auto-train](https://github.com/samsulpanjul/umamusume-auto-train)
+- **Template matching inspiration**: [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
+
+### Contributors to the original work:
+- **samsulpanjul** - Original author and main developer
+- **daftuyda** - Contributing developer  
+- **themistymoon** - Advanced point-based training system and major refactor
+
+We are grateful to all the contributors who made this project possible through their hard work and dedication.
+
+---
 
 [Demo video](https://youtu.be/CXSYVD-iMJk)
 
@@ -159,6 +172,32 @@ Starting from the second year, it switches to the second logic. If there’s no 
 - Automatically picks the top option during chain events. Be careful with Acupuncture event, it always picks the top option.
 - If you bring a friend support card (like Tazuna/Aoi Kiryuin) and do recreation, the bot can't decide whether to date with the friend support card or the Uma.
 - When `prioritize_g1_race` is set to `true`, the bot will always prioritize racing, even if your energy is low or you've already done 3 or more consecutive races.
+
+## 📜 License & Attribution
+
+### Original Work License
+This project builds upon the original work by [samsulpanjul](https://github.com/samsulpanjul) and other contributors. We respect and maintain the same licensing terms as the original repository.
+
+### Major Enhancements in This Fork
+- ✨ **Advanced Point-Based Training System** with image recognition for special supporters
+- 🎯 **Sophisticated Scoring Algorithm** (Kitasan, exclamation marks, rainbow bonuses)
+- 🎮 **Modern Overlay GUI** with dark theme and improved UX
+- 🖥️ **Multi-Monitor Support** and enhanced screen detection
+- 🔧 **Comprehensive Bug Fixes** and improved error handling
+- 📁 **Restructured Codebase** for better maintainability
+
+### Acknowledgments
+Special thanks to:
+- **[samsulpanjul](https://github.com/samsulpanjul)** for creating the original AutoTrain system
+- **[daftuyda](https://github.com/daftuyda)** for contributions to the original codebase
+- **[shiokaze](https://github.com/shiokaze/UmamusumeAutoTrainer)** for template matching inspiration
+- The **Umamusume community** for their continuous support and feedback
+
+---
+
+## ⚠️ Disclaimer
+
+This software is provided "as is" without any warranties. Use at your own risk. We are not responsible for any issues, account bans, or losses that may occur from using this software. Always use responsibly and in accordance with the game's terms of service.
 
 ### TODO
 
