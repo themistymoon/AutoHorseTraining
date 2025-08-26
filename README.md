@@ -1,14 +1,14 @@
-# AutoHorseTraining - Umamusume Auto Train
+# AutoHorseTraining
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub stars](https://img.shields.io/github/stars/themistymoon/AutoHorseTraining.svg)](https://github.com/themistymoon/AutoHorseTraining/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/themistymoon/AutoHorseTraining.svg)](https://github.com/themistymoon/AutoHorseTraining/issues)
 
-Like the title says, this is a simple auto training for Umamusume with advanced point-based training system.
+Advanced automated training system for Uma Musume Pretty Derby with sophisticated point-based decision making and configurable hotkey support.
 
-## 🙏 Attribution & Credits
+## Attribution & Credits
 
-This project is inspired by and builds upon the excellent work from:
+This project builds upon the excellent work from:
 - **Original Repository**: [samsulpanjul/umamusume-auto-train](https://github.com/samsulpanjul/umamusume-auto-train)
 - **Template matching inspiration**: [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
 
@@ -16,77 +16,132 @@ This project is inspired by and builds upon the excellent work from:
 - **samsulpanjul** - Original author and main developer
 - **daftuyda** - Contributing developer  
 
-We are grateful to all the contributors who made this project possible through their hard work and dedication.
+We are grateful to all contributors who made this project possible.
 
----
-
-**Demo video**: Coming soon
-
-**Screenshot**: Coming soon
-
-# ⚠️ USE IT AT YOUR OWN RISK ⚠️
-
-I am not responsible for any issues, account bans, or losses that may occur from using it.
-Use responsibly and at your own discretion.
+**USE AT YOUR OWN RISK** - We are not responsible for any issues, account bans, or losses that may occur from using this tool.
 
 ## Features
 
-- Automatically trains Uma
-- Keeps racing until fan count meets the goal, and always picks races with matching aptitude
-- Checks mood
-- Handle debuffs
-- Rest
-- Prioritizes G1 races if available for fan farming
-- Stat target feature, if a stat already hits the target, skip training that one
-- Auto-purchase skill
-- **Beautiful Overlay GUI** that displays on top of the game
-- **F1 Hotkey Support** for easy in-game control
-- **Modern Dark Theme** interface
-- **Multi-Monitor Support** with easy monitor selection
+- **Point-Based Training System** with intelligent supporter recognition
+- **Configurable Hotkeys** with easy GUI editor (default F1)
+- **Modern Overlay GUI** with dark theme and real-time controls
+- **Multi-Monitor Support** for dual monitor setups
+- **Special Supporter Recognition** (Kitasan, Director, Otonashi)
+- **Rainbow Synergy Bonuses** for matching supporter types
+- **Mood-Based Recreation Logic** for optimal training efficiency
 - **Real-time OCR and Template Matching** for game state detection
+- **Automatic Race Handling** with aptitude matching
+- **Stat Target System** to prevent overtraining
+- **Auto-Purchase Skills** with configurable skill selection
 
-## Getting Started
+## Requirements
 
-### Quick Start
-1. **Run the GUI:** `python start_gui.py`
-2. **OR alternatively:** `python overlay_gui.py`
+- **Python 3.10 or higher**
+- **Windows OS** (tested on Windows 10/11)
+- **Screen Resolution:** 1920x1080 (fullscreen game)
+- **Uma Musume Pretty Derby** installed and running
+
+## Quick Start
+
+### Option 1: One-Click Launcher (Recommended)
+1. Download the latest release ZIP file
+2. Extract to any folder
+3. **Double-click `AutoHorseTraining.bat`**
+4. The launcher will automatically install dependencies and start the GUI
+
+### Option 2: Manual Installation
+```bash
+git clone https://github.com/themistymoon/AutoHorseTraining.git
+cd AutoHorseTraining
+pip install -r requirements.txt
+python start_gui.py
+```
+
+## Usage
+
+### Running the Bot
+
+#### GUI Mode (Recommended)
+```bash
+python start_gui.py
+```
+- Modern overlay interface with hotkey support
+- Real-time configuration and bot status
+- Configurable hotkey system (default F1)
+- Dark theme and multi-monitor support
+
+#### Direct Overlay
+```bash
+python overlay_gui.py
+```
+- Same features as GUI mode
+- Direct launch without startup messages
+
+#### Terminal Mode
+```bash
+python main.py
+```
+- Command line interface only
+- Uses config.json settings
+- F1 hotkey still works
 
 ### First Time Setup
-1. **Configure Monitor** (for dual monitor users):
-   - Open the overlay GUI
-   - Go to **🖥️ Monitor Settings** section
-   - Select the monitor where your game is running
-   - Test with **📸 Test Screenshot** and **🔍 Test OCR**
 
-2. **Configure Bot Settings** in the GUI:
+1. **Run the GUI:** `python start_gui.py` or `AutoHorseTraining.bat`
+2. **Configure Monitor** (for dual monitor users):
+   - Go to Monitor Settings section
+   - Select monitor where game is running
+   - Test with "Test Screenshot" and "Test OCR"
+3. **Configure Training:**
    - Set training priorities
-   - Configure mood and failure thresholds  
+   - Configure mood and failure thresholds
    - Set up skill auto-purchase
    - Adjust stat caps
 
-### Usage
-- **Start/Stop Bot:** Press **F1** in-game or use GUI buttons
-- **Monitor Status:** Check the overlay for real-time bot status
-- **Adjust Settings:** Modify configuration in the GUI (auto-saves)
+### Hotkey Configuration
 
-### Requirements
+- Click the hotkey button (shows current key like "F1") next to "Start Training"
+- Press any key in the dialog to set as new hotkey
+- Changes take effect immediately and save automatically
+- Default is F1, can be changed to any key
 
-- [Python 3.10+](https://www.python.org/downloads/)
+## Point-Based Training System
 
-### Setup
+Advanced scoring system that evaluates training options:
 
-#### Clone repository
+### Base Scoring
+- **1.0 point** per regular supporter in training
+- **1.5 points** for supporters with exclamation marks
+- **1.5 points** for Kitasan (special recognition)
+- **0.5 points** for Director and Otonashi
 
-```
-git clone https://github.com/samsulpanjul/umamusume-auto-train.git
-cd umamusume-auto-train
-```
+### Bonuses
+- **+0.5 points** for Speed or Wisdom training (main stats)
+- **2.0 points** for matching rainbow supporters
+- **5.0 points** when 2+ matching rainbow supporters in same training
 
-#### Install dependencies
+### Recreation Logic
+- If best training scores less than 2.5-3.0 points AND mood isn't Great, choose recreation
 
-```
-pip install -r requirements.txt
-```
+## Game Requirements
+
+- **Screen Resolution:** Must be 1920x1080
+- **Game Mode:** Fullscreen only
+- **Prerequisites:** Uma must have won trophies for races (bot skips races)
+- **Window State:** Game window must not be covered by other applications
+
+## Controls
+
+### In-Game
+- **Configurable Hotkey (default F1):** Start/Stop bot toggle
+- Works from anywhere while game is active
+
+### GUI Interface
+- **Start/Stop:** Large button or hotkey
+- **Test Screenshot:** Verify monitor detection
+- **Test OCR:** Check text recognition
+- **Skills Editor:** Configure auto-purchase
+- **Monitor Settings:** Multi-monitor support
 
 ### Running the Bot
 
