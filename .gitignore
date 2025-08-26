@@ -191,3 +191,14 @@ temp/
 *.msi
 *.deb
 *.rpm
+
+# Installers and setup files
+*_Setup.exe
+*Setup*.exe
+AutoHorseTraining_Installer.bat
+Uninstall_AutoHorseTraining.bat
+installer.py
+simple_installer.py
+
+# Build tools (keep in repo but don't distribute)
+tools/
