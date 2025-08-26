@@ -48,8 +48,8 @@ Use responsibly and at your own discretion.
 ## Getting Started
 
 ### Quick Start
-1. **Double-click `start_bot.bat`** - This will launch the overlay GUI
-2. **OR run manually:** `python overlay_gui.py`
+1. **Run the GUI:** `python start_gui.py`
+2. **OR alternatively:** `python overlay_gui.py`
 
 ### First Time Setup
 1. **Configure Monitor** (for dual monitor users):
@@ -92,45 +92,30 @@ pip install -r requirements.txt
 
 You now have multiple options to run the bot:
 
-#### Option 1: GUI Application (Recommended)
+#### Option 1: Overlay GUI (Recommended)
 ```
-python launcher.py
+python start_gui.py
 ```
-Then select option 1 for the desktop GUI application.
 
 Features:
-- Visual interface with tabs for different settings
-- Real-time configuration changes
-- Built-in bot start/stop controls
-- No need for web browser
+- Modern overlay interface with hotkey support
+- Real-time configuration changes and bot status
+- Built-in F1 hotkey for in-game control
+- Dark theme and responsive design
 
-#### Option 2: Web Interface
+#### Option 2: Direct GUI
 ```
-python launcher.py
+python overlay_gui.py
 ```
-Then select option 2 for the web interface, or run directly:
+#### Option 3: Terminal Mode
 ```
 python main.py
 ```
 
 Features:
-- Browser-based configuration at http://localhost:8000
-- Good for remote configuration
-- Modern web interface
-
-#### Option 3: Hotkey Only
-```
-python launcher.py
-```
-Then select option 3 for hotkey-only mode.
-
-Features:
-- No configuration interface
-- Uses existing config.json
-- Press F1 in-game to start/stop
-
-#### Quick Start (Windows)
-Double-click `start_bot.bat` for an easy launcher.
+- Command line interface only
+- Uses existing config.json settings
+- F1 hotkey still works for start/stop
 
 ### BEFORE YOU START
 
