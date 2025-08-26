@@ -1,13 +1,11 @@
 import time
 import pygetwindow as gw
 import threading
-import uvicorn
 import keyboard
 import pyautogui
 
-from core.execute import career_lobby
-import core.state as state
-from server.main import app
+from bot_core.execute import career_lobby, career_lobby_iteration
+import bot_core.state as state
 
 hotkey = "f1"
 
@@ -35,6 +33,38 @@ def main():
   else:
     print("Failed to focus Umamusume window")
 
+def main_loop(is_running_callback=None):
+  """Main bot loop that can be controlled externally"""
+  
+  # Run the main loop with external control
+  if is_running_callback:
+    print("Uma Auto!")
+    if not focus_umamusume():
+      print("Failed to focus Umamusume window")
+      return
+    
+    state.reload_config()
+    state.is_bot_running = True
+    
+    while is_running_callback():
+      try:
+        # Run one iteration of the career lobby
+        career_lobby_iteration()
+        if not is_running_callback():
+          break
+        time.sleep(0.1)  # Small delay between iterations
+      except Exception as e:
+        print(f"Bot error: {e}")
+        break
+    state.is_bot_running = False
+  else:
+    print("Uma Auto!")
+    if focus_umamusume():
+      state.reload_config()
+      career_lobby()
+    else:
+      print("Failed to focus Umamusume window")
+
 def hotkey_listener():
   while True:
     keyboard.wait(hotkey)
@@ -48,19 +78,14 @@ def hotkey_listener():
       state.is_bot_running = False
     time.sleep(0.5)
 
-def start_server():
-  res = pyautogui.resolution()
-  if res.width != 1920 or res.height != 1080:
-    print(f"[ERROR] Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
-    return
-  host = "127.0.0.1"
-  port = 8000
-  print(f"[INFO] Press '{hotkey}' to start/stop the bot.")
-  print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
-  config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
-  server = uvicorn.Server(config)
-  server.run()
-
 if __name__ == "__main__":
   threading.Thread(target=hotkey_listener, daemon=True).start()
-  start_server()
+  # Note: start_server() removed - use overlay GUI instead
+  print("[INFO] Use 'python start_gui.py' to launch the overlay GUI")
+  print(f"[INFO] Or press '{hotkey}' to start/stop the bot directly")
+  
+  try:
+    while True:
+      time.sleep(1)
+  except KeyboardInterrupt:
+    print("\n[INFO] Exiting...")

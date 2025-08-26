@@ -23,9 +23,35 @@ Use responsibly and at your own discretion.
 - Prioritizes G1 races if available for fan farming
 - Stat target feature, if a stat already hits the target, skip training that one
 - Auto-purchase skill
-- Web Interface for easier configuration
+- **Beautiful Overlay GUI** that displays on top of the game
+- **F1 Hotkey Support** for easy in-game control
+- **Modern Dark Theme** interface
+- **Multi-Monitor Support** with easy monitor selection
+- **Real-time OCR and Template Matching** for game state detection
 
 ## Getting Started
+
+### Quick Start
+1. **Double-click `start_bot.bat`** - This will launch the overlay GUI
+2. **OR run manually:** `python overlay_gui.py`
+
+### First Time Setup
+1. **Configure Monitor** (for dual monitor users):
+   - Open the overlay GUI
+   - Go to **🖥️ Monitor Settings** section
+   - Select the monitor where your game is running
+   - Test with **📸 Test Screenshot** and **🔍 Test OCR**
+
+2. **Configure Bot Settings** in the GUI:
+   - Set training priorities
+   - Configure mood and failure thresholds  
+   - Set up skill auto-purchase
+   - Adjust stat caps
+
+### Usage
+- **Start/Stop Bot:** Press **F1** in-game or use GUI buttons
+- **Monitor Status:** Check the overlay for real-time bot status
+- **Adjust Settings:** Modify configuration in the GUI (auto-saves)
 
 ### Requirements
 
@@ -45,6 +71,50 @@ cd umamusume-auto-train
 ```
 pip install -r requirements.txt
 ```
+
+### Running the Bot
+
+You now have multiple options to run the bot:
+
+#### Option 1: GUI Application (Recommended)
+```
+python launcher.py
+```
+Then select option 1 for the desktop GUI application.
+
+Features:
+- Visual interface with tabs for different settings
+- Real-time configuration changes
+- Built-in bot start/stop controls
+- No need for web browser
+
+#### Option 2: Web Interface
+```
+python launcher.py
+```
+Then select option 2 for the web interface, or run directly:
+```
+python main.py
+```
+
+Features:
+- Browser-based configuration at http://localhost:8000
+- Good for remote configuration
+- Modern web interface
+
+#### Option 3: Hotkey Only
+```
+python launcher.py
+```
+Then select option 3 for hotkey-only mode.
+
+Features:
+- No configuration interface
+- Uses existing config.json
+- Press F1 in-game to start/stop
+
+#### Quick Start (Windows)
+Double-click `start_bot.bat` for an easy launcher.
 
 ### BEFORE YOU START
 

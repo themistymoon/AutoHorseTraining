@@ -1,0 +1,26 @@
+{
+  "prioritize_g1": true,
+  "cancel_consecutive": true,
+  "enable_skill_buying": false,
+  "debug_logging": true,
+  "save_screenshots": false,
+  "training_logic": "point_based",
+  "failure_chance": 30,
+  "minimal_mood": 3,
+  "rainbow_strict": false,
+  "ocr_confidence": 80,
+  "action_delay": 500,
+  "priority_order": [
+    "Speed",
+    "Stamina",
+    "Power",
+    "Guts",
+    "Wisdom"
+  ],
+  "selected_skills": [
+    "Speed Star \u2b50",
+    "Stamina Boost \ud83d\udcaa",
+    "Power Drive \ud83d\udd25",
+    "Mental Strength \ud83e\udde0"
+  ]
+}

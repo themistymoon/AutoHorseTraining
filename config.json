@@ -7,8 +7,8 @@
     "guts"
   ],
   "minimum_mood": "NORMAL",
-  "maximum_failure": 15,
-  "prioritize_g1_race": false,
+  "maximum_failure": 40,
+  "prioritize_g1_race": true,
   "cancel_consecutive_race": true,
   "stat_caps": {
     "spd": 1100,
@@ -27,5 +27,32 @@
       "Professor of Curvature",
       "Swinging Maestro"
     ]
-  }
+  },
+  "monitor_config": {
+    "selected_monitor_id": "monitor_1",
+    "selected_monitor_name": "Monitor 1",
+    "bbox": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "size": "1920x1080"
+  },
+  "mouse_settings": {
+    "movement_mode": "teleport",
+    "movement_duration": 0.175
+  },
+  "performance_settings": {
+    "gpu_mode": "cpu"
+  },
+  "human_behavior": {
+    "enabled": true,
+    "thinking_delays": true,
+    "curved_movement": true,
+    "random_breaks": true,
+    "click_variation": true,
+    "mistake_chance": 0.02
+  },
+  "min_mood": "VERY_GOOD"
 }
