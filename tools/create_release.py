@@ -13,6 +13,9 @@ def create_release():
     """Create a release package"""
     print("Creating AutoHorseTraining release package...")
     
+    # Change to parent directory (project root)
+    os.chdir(Path(__file__).parent.parent)
+    
     # Create release directory
     release_dir = Path("release")
     if release_dir.exists():
