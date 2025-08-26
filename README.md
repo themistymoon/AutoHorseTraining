@@ -15,15 +15,14 @@ This project is inspired by and builds upon the excellent work from:
 ### Contributors to the original work:
 - **samsulpanjul** - Original author and main developer
 - **daftuyda** - Contributing developer  
-- **themistymoon** - Advanced point-based training system and major refactor
 
 We are grateful to all the contributors who made this project possible through their hard work and dedication.
 
 ---
 
-[Demo video](https://youtu.be/CXSYVD-iMJk)
+**Demo video**: Coming soon
 
-![Screenshot](screenshot.png)
+**Screenshot**: Coming soon
 
 # ⚠️ USE IT AT YOUR OWN RISK ⚠️
 
