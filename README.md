@@ -1,5 +1,9 @@
 # AutoHorseTraining - Umamusume Auto Train
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![GitHub stars](https://img.shields.io/github/stars/themistymoon/AutoHorseTraining.svg)](https://github.com/themistymoon/AutoHorseTraining/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/themistymoon/AutoHorseTraining.svg)](https://github.com/themistymoon/AutoHorseTraining/issues)
+
 Like the title says, this is a simple auto training for Umamusume with advanced point-based training system.
 
 ## 🙏 Attribution & Credits
@@ -175,8 +179,11 @@ Starting from the second year, it switches to the second logic. If there’s no 
 
 ## 📜 License & Attribution
 
+### License
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
+
 ### Original Work License
-This project builds upon the original work by [samsulpanjul](https://github.com/samsulpanjul) and other contributors. We respect and maintain the same licensing terms as the original repository.
+This project builds upon the original work by [samsulpanjul](https://github.com/samsulpanjul) and other contributors. We respect and maintain the same open-source licensing spirit as the original repository.
 
 ### Major Enhancements in This Fork
 - ✨ **Advanced Point-Based Training System** with image recognition for special supporters

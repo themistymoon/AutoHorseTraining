@@ -48,7 +48,19 @@ We are deeply grateful to all the original contributors who made this project po
 
 ## 📄 Licensing
 
-This project maintains respect for the original licensing terms and continues the open-source spirit of the original work. All enhancements and modifications are shared under the same principles.
+This project is licensed under the **Apache License 2.0**, which allows for:
+- ✅ Commercial use
+- ✅ Modification  
+- ✅ Distribution
+- ✅ Patent use
+- ✅ Private use
+
+**Requirements:**
+- Include original copyright and license notices
+- State changes made to the original code
+- Include the license text
+
+This project maintains respect for the original licensing terms and continues the open-source spirit of the original work. All enhancements and modifications are shared under the Apache 2.0 license.
 
 ## 🔗 Repository Evolution
 
